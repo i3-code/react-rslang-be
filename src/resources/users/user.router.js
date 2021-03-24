@@ -13,15 +13,10 @@ router.post('/', validator(user, 'body'), async (req, res) => {
   res.status(OK).send(userEntity.toResponse());
 });
 
-router.get(
-  '/:id',
-  userIdValidator,
-  validator(id, 'params'),
-  async (req, res) => {
-    const userEntity = await userService.get(req.params.id);
-    res.status(OK).send(userEntity.toResponse());
-  }
-);
+router.get('/whoAmI', async (req, res) => {
+  const userEntity = await userService.get(req.userId);
+  res.status(OK).send(userEntity.toResponse());
+});
 
 router.put(
   '/:id',
