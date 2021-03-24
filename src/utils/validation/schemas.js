@@ -33,7 +33,10 @@ const schemas = {
     .options({ abortEarly: false, allowUnknown: true })
     .keys({
       name: Joi.string().max(200),
-      email: Joi.string().email({ tlds: { allow: false } }),
+      email: Joi.string().email({
+        minDomainSegments: 1,
+        tlds: { allow: false }
+      }),
       password: Joi.string().min(MIN_PASSWORD_LENGTH)
     }),
   userWord: Joi.object()
